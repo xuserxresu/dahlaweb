@@ -24,7 +24,7 @@ const Footer = () => {
   return (
     <footer className="bg-navy text-white">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Company Info */}
           <div>
             <div className="mb-4">
@@ -87,41 +87,20 @@ const Footer = () => {
             </div>
           ))}
 
-          {/* Newsletter Signup */}
+          {/* Social Media Links */}
           <div>
             <h3 className="font-semibold text-lg mb-4 relative pb-2">
-              Get in Touch
+              Connect With Us
               <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-dahla"></span>
             </h3>
-            <p className="text-gray-300 text-sm mb-4">
-              Subscribe to our newsletter to receive updates and offers.
-            </p>
-            <form className="flex mb-4">
-              <input 
-                type="email" 
-                placeholder="Your email" 
-                className="bg-navy-light text-white px-3 py-2 rounded-l-md flex-grow text-sm border border-gray-700 focus:outline-none focus:border-dahla"
-                aria-label="Email for newsletter"
-              />
-              <button 
-                type="submit" 
-                className="bg-dahla hover:bg-dahla-dark px-4 py-2 rounded-r-md text-white text-sm font-medium transition-colors"
-                aria-label="Subscribe to newsletter"
-              >
-                Subscribe
-              </button>
-            </form>
             <div className="flex space-x-4 mt-4">
-              <a href="#" className="text-gray-300 hover:text-dahla transition-colors" aria-label="Facebook">
+              <a href="https://www.facebook.com/dahlagroup/" className="text-gray-300 hover:text-dahla transition-colors" aria-label="Facebook">
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href="#" className="text-gray-300 hover:text-dahla transition-colors" aria-label="Twitter">
-                <Twitter className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-gray-300 hover:text-dahla transition-colors" aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/company/dahla-group/" className="text-gray-300 hover:text-dahla transition-colors" aria-label="LinkedIn">
                 <Linkedin className="h-5 w-5" />
               </a>
-              <a href="#" className="text-gray-300 hover:text-dahla transition-colors" aria-label="Instagram">
+              <a href="https://www.instagram.com/dahlagroup/" className="text-gray-300 hover:text-dahla transition-colors" aria-label="Instagram">
                 <Instagram className="h-5 w-5" />
               </a>
             </div>
