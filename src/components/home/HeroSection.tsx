@@ -1,4 +1,3 @@
-
 import { ChevronRight } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
@@ -13,12 +12,12 @@ const HeroSection = () => {
   return (
     <section className="relative h-screen min-h-[600px] overflow-hidden">
       {/* Background image with overlay */}
-      <div className="absolute inset-0 bg-navy/50">
+      <div className="absolute inset-0 bg-navy/60 backdrop-blur-sm">
         <div 
           className="absolute inset-0 bg-cover bg-center"
           style={{ 
             backgroundImage: 'url("https://ik.imagekit.io/sharfi/sharfi__cargo_ship_on_sea_under_blue_sky_during_daytime_--ar_16_3bf98d8f-6076-43ef-8350-81941fd4d3fb.png?updatedAt=1740664468780")', 
-            opacity: 0.7
+            opacity: 0.65
           }}
         ></div>
       </div>

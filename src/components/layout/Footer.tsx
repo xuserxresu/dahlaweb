@@ -1,9 +1,40 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Mail, Phone, MapPin, Clock, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import { useEffect } from 'react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const location = useLocation();
+  const navigate = useNavigate();
   
+  // Scroll to top utility
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Smooth scroll utility function
+  const scrollToSection = (elementId: string) => {
+    const element = document.getElementById(elementId);
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
+  // Handle hash navigation after page load
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace('#', '');
+      setTimeout(() => {
+        scrollToSection(id);
+      }, 100);
+    } else {
+      window.scrollTo({ top: 0 });
+    }
+  }, [location.pathname, location.hash]);
+
   // Navigation items
   const navItems = [
     { title: 'Navigation', links: [
@@ -11,13 +42,6 @@ const Footer = () => {
       { name: 'About Us', path: '/about' },
       { name: 'Services', path: '/services' },
       { name: 'Contact Us', path: '/contact' },
-    ]},
-    { title: 'Our Services', links: [
-      { name: 'Air Freight', path: '/services#air-freight' },
-      { name: 'Sea Freight', path: '/services#sea-freight' },
-      { name: 'Land Transport', path: '/services#land-transport' },
-      { name: 'Customs Clearance', path: '/services#customs-clearance' },
-      { name: 'Charter Flights', path: '/services#charter-flights' },
     ]},
   ];
 
@@ -76,7 +100,21 @@ const Footer = () => {
                 {group.links.map((link) => (
                   <li key={link.name}>
                     <Link 
-                      to={link.path} 
+                      to={link.path}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (link.path.includes('#')) {
+                          const [path, hash] = link.path.split('#');
+                          if (location.pathname === path) {
+                            scrollToSection(hash);
+                          } else {
+                            navigate(link.path);
+                          }
+                        } else {
+                          navigate(link.path);
+                          scrollToTop();
+                        }
+                      }}
                       className="text-gray-300 hover:text-dahla transition-colors text-sm inline-block py-1"
                     >
                       {link.name}
@@ -109,7 +147,7 @@ const Footer = () => {
         
         <div className="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
           <p>
-            © {currentYear} Dahla Group. All rights reserved.
+            {currentYear} Dahla Group. All rights reserved.
           </p>
         </div>
       </div>

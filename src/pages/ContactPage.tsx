@@ -1,8 +1,18 @@
 import { Helmet } from "react-helmet";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Mail, Phone, Clock, MapPin } from "lucide-react";
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+
+interface Location {
+  title: string;
+  address: string;
+  phone: string;
+  email: string;
+  coordinates: [number, number]; // [latitude, longitude]
+}
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +22,114 @@ const ContactPage = () => {
     subject: '',
     message: ''
   });
+  const mapRef = useRef<HTMLDivElement>(null);
+  const [map, setMap] = useState<L.Map | null>(null);
+
+  const locations: Location[] = [
+    {
+      title: "Sharjah",
+      address: "Industrial Area 10, Sharjah, UAE",
+      phone: "+971-6-5396796",
+      email: "sharjah@dahla.net",
+      coordinates: [25.3192, 55.4209]
+    },
+    {
+      title: "Dubai",
+      address: "Dubai Creek, Dubai, UAE",
+      phone: "+971-4-2235511",
+      email: "dubai@dahla.net",
+      coordinates: [25.2048, 55.2708]
+    },
+    {
+      title: "Jebel Ali",
+      address: "Jebel Ali Free Zone, Dubai, UAE",
+      phone: "+971-4-8835522",
+      email: "jebelali@dahla.net",
+      coordinates: [24.9857, 55.0658]
+    },
+    {
+      title: "Khartoum",
+      address: "Khartoum International Airport Area, Sudan",
+      phone: "+249-183-570023",
+      email: "khartoum@dahla.net",
+      coordinates: [15.5007, 32.5599]
+    }
+  ];
+
+  useEffect(() => {
+    if (!mapRef.current || map) return;
+
+    // Create map instance
+    const mapInstance = L.map(mapRef.current).setView([24.9857, 55.0658], 4);
+
+    // Add tile layer (map style)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: ' OpenStreetMap contributors'
+    }).addTo(mapInstance);
+
+    // Custom icon for markers
+    const customIcon = L.divIcon({
+      className: 'custom-marker',
+      html: `<div class="w-6 h-6 rounded-full bg-dahla border-2 border-white shadow-lg flex items-center justify-center">
+              <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+              </svg>
+            </div>`,
+      iconSize: [24, 24],
+      iconAnchor: [12, 24],
+      popupAnchor: [0, -24]
+    });
+
+    // Add markers for each location
+    const bounds = L.latLngBounds(locations.map(loc => loc.coordinates));
+    
+    locations.forEach(location => {
+      const marker = L.marker(location.coordinates, { icon: customIcon })
+        .addTo(mapInstance)
+        .bindPopup(`
+          <div class="p-3">
+            <h3 class="font-bold text-navy text-lg mb-2">${location.title}</h3>
+            <p class="text-gray-600 mb-1">${location.address}</p>
+            <p class="text-gray-600 mb-1">${location.phone}</p>
+            <a href="mailto:${location.email}" class="text-dahla hover:text-dahla-dark">${location.email}</a>
+          </div>
+        `, {
+          maxWidth: 300,
+          className: 'custom-popup'
+        });
+    });
+
+    // Fit map to show all markers
+    mapInstance.fitBounds(bounds, { padding: [50, 50] });
+
+    setMap(mapInstance);
+
+    return () => {
+      mapInstance.remove();
+    };
+  }, []);
+
+  // Add required styles to head
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      .custom-marker {
+        background: transparent;
+        border: none;
+      }
+      .custom-popup .leaflet-popup-content-wrapper {
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      }
+      .custom-popup .leaflet-popup-tip {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      }
+    `;
+    document.head.appendChild(style);
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -38,33 +156,6 @@ const ContactPage = () => {
     // Show success message
     alert('Thank you for your message. We will get back to you soon!');
   };
-
-  const locations = [
-    {
-      title: "Sharjah",
-      address: "Industrial Area 10, Sharjah, UAE",
-      phone: "+971-6-5396796",
-      email: "sharjah@dahla.net"
-    },
-    {
-      title: "Dubai",
-      address: "Dubai Creek, Dubai, UAE",
-      phone: "+971-4-2235511",
-      email: "dubai@dahla.net"
-    },
-    {
-      title: "Jebel Ali",
-      address: "Jebel Ali Free Zone, Dubai, UAE",
-      phone: "+971-4-8835522",
-      email: "jebelali@dahla.net"
-    },
-    {
-      title: "Khartoum",
-      address: "Khartoum International Airport Area, Sudan",
-      phone: "+249-183-570023",
-      email: "khartoum@dahla.net"
-    }
-  ];
 
   return (
     <>
@@ -254,17 +345,8 @@ const ContactPage = () => {
           {/* Map Section */}
           <section className="py-12">
             <div className="container mx-auto px-4">
-              <div className="bg-gray-200 rounded-lg overflow-hidden h-96 relative">
-                {/* This would typically contain an interactive map */}
-                <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
-                  <div className="text-center">
-                    <MapPin className="h-12 w-12 text-dahla mx-auto mb-4" />
-                    <h3 className="text-xl font-bold text-navy mb-2">Interactive Map</h3>
-                    <p className="text-gray-600">
-                      Map would be embedded here in a production environment
-                    </p>
-                  </div>
-                </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-lg">
+                <div ref={mapRef} className="h-[600px] w-full"></div>
               </div>
             </div>
           </section>

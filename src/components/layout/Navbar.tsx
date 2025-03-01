@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -7,6 +7,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   
   // Check if current page is home page
   const isHomePage = location.pathname === '/';
@@ -92,7 +93,10 @@ const Navbar = () => {
               {item.name}
             </Link>
           ))}
-          <Button className="bg-dahla hover:bg-dahla-dark text-white">
+          <Button 
+            className="bg-dahla hover:bg-dahla-dark text-white"
+            onClick={() => navigate('/contact')}
+          >
             Get A Quote
           </Button>
         </nav>
@@ -129,7 +133,13 @@ const Navbar = () => {
                 {item.name}
               </Link>
             ))}
-            <Button className="bg-dahla hover:bg-dahla-dark text-white w-full">
+            <Button 
+              className="bg-dahla hover:bg-dahla-dark text-white w-full"
+              onClick={() => {
+                navigate('/contact');
+                setMobileMenuOpen(false);
+              }}
+            >
               Get A Quote
             </Button>
           </nav>

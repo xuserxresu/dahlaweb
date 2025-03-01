@@ -156,7 +156,7 @@ const ServicesPage = () => {
           </section>
           
           {/* Services Details */}
-          <section ref={servicesRef} id={currentService.id} className="py-20">
+          <section ref={servicesRef} id={currentService.id} className="py-20 bg-white">
             <div className="container mx-auto px-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div>
@@ -165,19 +165,19 @@ const ServicesPage = () => {
                     <span className="absolute bottom-0 left-0 w-16 h-1 bg-dahla"></span>
                   </h2>
                   
-                  <p className="text-gray-600 mb-8">
+                  <p className="text-gray-600 mb-8 text-lg leading-relaxed">
                     {currentService.description}
                   </p>
                   
                   <div className="mb-8">
-                    <h3 className="text-lg font-semibold text-navy mb-4">Key Features:</h3>
-                    <ul className="space-y-3">
+                    <h3 className="text-xl font-semibold text-navy mb-6">Key Features:</h3>
+                    <ul className="space-y-4">
                       {currentService.features.map((feature, index) => (
                         <li key={index} className="flex items-start">
-                          <svg className="w-5 h-5 text-dahla mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                          <svg className="w-6 h-6 text-dahla mr-3 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
                           </svg>
-                          <span className="text-gray-700">{feature}</span>
+                          <span className="text-gray-700 text-lg">{feature}</span>
                         </li>
                       ))}
                     </ul>
@@ -185,20 +185,20 @@ const ServicesPage = () => {
                   
                   <Link 
                     to="/contact" 
-                    className="bg-dahla hover:bg-dahla-dark text-white font-semibold py-3 px-6 rounded-md transition-all duration-300 inline-flex items-center"
+                    className="bg-dahla hover:bg-dahla-dark text-white font-semibold py-4 px-8 rounded-md transition-all duration-300 inline-flex items-center text-lg shadow-lg hover:shadow-xl"
                   >
                     Get a Quote
-                    <svg className="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="ml-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>
                   </Link>
                 </div>
                 
-                <div className="relative rounded-lg overflow-hidden shadow-xl">
+                <div className="relative rounded-xl overflow-hidden shadow-2xl">
                   <img 
                     src={currentService.image} 
                     alt={`Dahla Group ${currentService.title} services`} 
-                    className="w-full h-full object-cover"
+                    className="w-full h-[500px] object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent"></div>
                 </div>
@@ -206,70 +206,21 @@ const ServicesPage = () => {
             </div>
           </section>
           
-          {/* Other Services */}
-          <section className="py-20 bg-gray-50">
-            <div className="container mx-auto px-4">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl font-bold text-navy mb-4">Explore Our Other Services</h2>
-                <div className="w-24 h-1 bg-dahla mx-auto mb-6"></div>
-                <p className="text-gray-600 max-w-2xl mx-auto">
-                  Dahla Group provides a comprehensive range of logistics solutions to meet all your freight forwarding needs.
-                </p>
-              </div>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                {services
-                  .filter(service => service.id !== activeService)
-                  .slice(0, 3)
-                  .map((service, index) => (
-                    <div 
-                      key={index} 
-                      className="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg"
-                    >
-                      <div className="h-48 overflow-hidden relative">
-                        <img 
-                          src={service.image} 
-                          alt={`Dahla Group ${service.title}`}
-                          className="w-full h-full object-cover transition-all duration-500 hover:scale-110"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-navy/70 to-transparent"></div>
-                        <div className="absolute bottom-4 left-4 text-white">
-                          <h3 className="text-xl font-bold">{service.title}</h3>
-                        </div>
-                      </div>
-                      <div className="p-6">
-                        <p className="text-gray-600 text-sm mb-4 line-clamp-3">
-                          {service.description}
-                        </p>
-                        <button 
-                          onClick={() => setActiveService(service.id)} 
-                          className="text-dahla hover:text-dahla-dark font-medium text-sm inline-flex items-center transition-colors"
-                        >
-                          Learn More
-                          <svg className="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                          </svg>
-                        </button>
-                      </div>
-                    </div>
-                  ))
-                }
-              </div>
-            </div>
-          </section>
-          
           {/* Call to Action */}
-          <section className="py-16 bg-navy text-white">
+          <section className="py-20 bg-gradient-to-br from-navy to-navy-dark text-white">
             <div className="container mx-auto px-4 text-center">
-              <h2 className="text-2xl md:text-3xl font-bold mb-6">Ready to optimize your logistics?</h2>
-              <p className="text-white/80 max-w-2xl mx-auto mb-8">
-                Contact our team today to discuss your specific freight forwarding requirements and get a customized quote.
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Optimize Your Logistics?</h2>
+              <p className="text-white/90 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+                Contact our team today to discuss your specific freight forwarding requirements and get a customized quote tailored to your needs.
               </p>
               <Link 
                 to="/contact" 
-                className="bg-dahla hover:bg-dahla-dark text-white font-semibold py-3 px-8 rounded-md transition-all duration-300 inline-flex items-center justify-center"
+                className="bg-dahla hover:bg-dahla-dark text-white font-semibold py-4 px-10 rounded-md transition-all duration-300 inline-flex items-center text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1"
               >
                 Contact Us Today
+                <svg className="ml-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
               </Link>
             </div>
           </section>
