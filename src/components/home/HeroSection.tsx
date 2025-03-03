@@ -10,7 +10,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative h-screen min-h-[600px] overflow-hidden">
+    <section className="relative h-[100svh] min-h-[600px] overflow-hidden">
       {/* Background image with overlay */}
       <div className="absolute inset-0 bg-navy/60 backdrop-blur-sm">
         <div 
@@ -23,28 +23,28 @@ const HeroSection = () => {
       </div>
       
       {/* Content */}
-      <div className="relative h-full container mx-auto px-4 flex flex-col justify-center">
-        <div className="max-w-3xl opacity-0 transition-all duration-700 ease-out transform translate-y-8" 
+      <div className="relative h-full w-full container mx-auto px-4 sm:px-6 flex flex-col justify-center">
+        <div className="max-w-3xl w-full opacity-0 transition-all duration-700 ease-out transform translate-y-8" 
           style={{ 
             opacity: isLoaded ? 1 : 0, 
             transform: isLoaded ? 'translateY(0)' : 'translateY(2rem)'
           }}
         >
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-            CONNECT YOUR<br />
-            BUSINESS TO A WORLD<br />
-            OF POSSIBILITIES
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4 sm:mb-6">
+            <span className="block">CONNECT YOUR</span>
+            <span className="block">BUSINESS TO A WORLD</span>
+            <span className="block">OF POSSIBILITIES</span>
           </h1>
           
-          <p className="text-lg text-white/90 mb-8 max-w-2xl">
+          <p className="text-base sm:text-lg text-white/90 mb-6 sm:mb-8 max-w-2xl">
             Discover top-tier air, sea, and land freight forwarding solutions with Dahla Group. 
             Trusted logistics services in UAE and Sudan since 1983.
           </p>
           
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-col sm:flex-row gap-4">
             <Link 
               to="/contact" 
-              className="btn-primary flex items-center"
+              className="btn-primary inline-flex items-center justify-center"
             >
               Get A Quote
               <ChevronRight className="ml-2 h-5 w-5" />
@@ -52,7 +52,7 @@ const HeroSection = () => {
             
             <Link
               to="/services" 
-              className="btn-secondary"
+              className="btn-secondary inline-flex items-center justify-center"
             >
               Our Services
             </Link>
