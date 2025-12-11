@@ -9,6 +9,11 @@ import NotFound from "./pages/NotFound";
 import AboutPage from "./pages/AboutPage";
 import ServicesPage from "./pages/ServicesPage";
 import ContactPage from "./pages/ContactPage";
+import AirFreightPage from "./pages/services/AirFreightPage";
+import SeaFreightPage from "./pages/services/SeaFreightPage";
+import AirlineActivitiesPage from "./pages/services/AirlineActivitiesPage";
+import SpecializedCargoPage from "./pages/services/SpecializedCargoPage";
+import LogisticsSupportPage from "./pages/services/LogisticsSupportPage";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +27,11 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/services" element={<ServicesPage />} />
+          <Route path="/services/air-freight" element={<AirFreightPage />} />
+          <Route path="/services/sea-freight" element={<SeaFreightPage />} />
+          <Route path="/services/airline-activities" element={<AirlineActivitiesPage />} />
+          <Route path="/services/specialized-cargo" element={<SpecializedCargoPage />} />
+          <Route path="/services/logistics-support" element={<LogisticsSupportPage />} />
           <Route path="/contact" element={<ContactPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

@@ -4,29 +4,32 @@
 export const getOrganizationSchema = () => ({
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "Dahla Group",
+  name: "DAHLA",
   url: "https://dahla.net",
   logo: "https://ik.imagekit.io/sharfi/Dahla-logo-white.png?updatedAt=1740666544459",
-  description: "Leading logistics and freight forwarding company providing air freight, sea freight, land transport, and customs clearance services in UAE and Sudan since 1983.",
+  description: "DAHLA delivers global air-freight, sea-freight, and charter services with specialized handling for complex cargo and award-winning airline partnerships.",
   foundingDate: "1983",
   address: {
     "@type": "PostalAddress",
-    addressCountry: "AE",
-    addressLocality: "Sharjah",
-    addressRegion: "Sharjah"
+    addressLocality: "Jebel Ali",
+    addressRegion: "Dubai",
+    addressCountry: "UAE"
   },
+  email: "sales@dahla.net",
+  telephone: "+971-6-5396796",
+  memberOf: "WCA",
+  award: [
+    "Top Cargo Agent – Emirates SkyCargo",
+    "Top Cargo Agent – Etihad Cargo",
+    "Top Cargo Agent – EgyptAir Cargo",
+    "Outstanding Achievement Award – Sharjah International Airport"
+  ],
   contactPoint: {
     "@type": "ContactPoint",
-    telephone: "+971-6-5396796",
-    contactType: "Customer Service",
-    areaServed: ["AE", "SD"],
-    availableLanguage: ["English", "Arabic"]
+    contactType: "sales",
+    email: "sales@dahla.net",
+    telephone: "+971-6-5396796"
   },
-  sameAs: [
-    "https://www.facebook.com/dahlagroup",
-    "https://www.linkedin.com/company/dahlagroup",
-    "https://twitter.com/dahlagroup"
-  ],
   areaServed: [
     {
       "@type": "Country",

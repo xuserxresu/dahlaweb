@@ -41,6 +41,11 @@ const Footer = () => {
       { name: 'Home', path: '/' },
       { name: 'About Us', path: '/about' },
       { name: 'Services', path: '/services' },
+      { name: 'Air-Freight Services', path: '/services/air-freight' },
+      { name: 'Sea-Freight Services', path: '/services/sea-freight' },
+      { name: 'Airline Activities', path: '/services/airline-activities' },
+      { name: 'Specialized Cargo Handling', path: '/services/specialized-cargo' },
+      { name: 'Logistics Support Services', path: '/services/logistics-support' },
       { name: 'Contact Us', path: '/contact' },
     ]},
   ];

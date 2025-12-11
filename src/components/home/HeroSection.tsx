@@ -31,14 +31,11 @@ const HeroSection = () => {
           }}
         >
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4 sm:mb-6">
-            <span className="block">CONNECT YOUR</span>
-            <span className="block">BUSINESS TO A WORLD</span>
-            <span className="block">OF POSSIBILITIES</span>
+            Global Freight Forwarding Excellence Since 1983
           </h1>
           
           <p className="text-base sm:text-lg text-white/90 mb-6 sm:mb-8 max-w-2xl">
-            Experience world-class air, sea, and land freight forwarding services with Dahla Group. 
-            Your trusted logistics partner in UAE and Sudan for over four decades, delivering excellence since 1983.
+            Specialists in air-freight, sea-freight, and chartered operations—trusted by leading airlines and recognized with multiple international accolades.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4">
@@ -46,7 +43,7 @@ const HeroSection = () => {
               to="/contact" 
               className="btn-primary inline-flex items-center justify-center"
             >
-              Get A Quote
+              Contact DAHLA Today
               <ChevronRight className="ml-2 h-5 w-5" />
             </Link>
             

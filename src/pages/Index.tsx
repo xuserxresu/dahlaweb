@@ -21,9 +21,9 @@ const Index = () => {
   return (
     <>
       <SEO
-        title="Expert Logistics & Freight Forwarding Services | Air Freight, Sea Freight, Land Transport UAE & Sudan"
-        description="Dahla Group: Leading logistics and freight forwarding company offering air freight, sea freight, land transport, and customs clearance services in UAE and Sudan since 1983. Get competitive rates for FCL, LCL, express shipping, and cargo services."
-        keywords="air freight UAE, sea freight Dubai, land freight Sudan, logistics company UAE, freight forwarding Dubai, cargo services UAE, FCL shipping, LCL shipping, customs clearance UAE, freight forwarder Dubai, logistics services UAE, shipping company Dubai, international freight forwarding, cargo transport UAE, freight logistics, express air freight, sea freight forwarding, land transport UAE, freight forwarding services, logistics solutions UAE"
+        title="DAHLA Freight Forwarding – Global Air & Sea Logistics Since 1983"
+        description="DAHLA delivers air-freight, sea-freight, charters, and specialized cargo solutions. Award-winning freight forwarding trusted by leading airlines since 1983."
+        keywords="freight forwarding company, air freight services, sea freight services, charter cargo flights, cargo handling, oversized cargo transport, heavy machinery shipping, oil equipment shipping, UN relief cargo, Etihad cargo agent, cargo brokerage services, customs clearance services, Ro/Ro cargo shipping, break bulk logistics"
         canonical="/"
         structuredData={[organizationSchema, websiteSchema, breadcrumbSchema]}
       />
