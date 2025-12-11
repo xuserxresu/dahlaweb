@@ -1,5 +1,5 @@
+import { useState } from 'react';
 import { MessageCircle } from 'lucide-react';
-import { useState, useEffect } from 'react';
 
 interface WhatsAppButtonProps {
   phoneNumber: string;
@@ -7,60 +7,94 @@ interface WhatsAppButtonProps {
 }
 
 const WhatsAppButton = ({
-  phoneNumber = "+971501234567", // Replace with your actual WhatsApp number
+  phoneNumber = "+971501234567",
   message = "Hello! I'm interested in Dahla Group's logistics services.",
 }: WhatsAppButtonProps) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [isLabelVisible, setIsLabelVisible] = useState(false);
-
-  useEffect(() => {
-    // Delay the button appearance for a smoother page load
-    const buttonTimer = setTimeout(() => setIsVisible(true), 1500);
-    // Show the label after the button appears
-    const labelTimer = setTimeout(() => setIsLabelVisible(true), 2500);
-
-    return () => {
-      clearTimeout(buttonTimer);
-      clearTimeout(labelTimer);
-    };
-  }, []);
+  const [isHovered, setIsHovered] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
 
   // Remove any non-numeric characters from phone number
   const cleanPhoneNumber = phoneNumber.replace(/\D/g, "");
-  
+
   const handleClick = () => {
     const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/${cleanPhoneNumber}?text=${encodedMessage}`;
-    window.open(whatsappUrl, "_blank");
+    window.open(`https://wa.me/${cleanPhoneNumber}?text=${encodedMessage}`, '_blank');
   };
 
   return (
-    <div className={`fixed bottom-4 right-4 z-50 flex items-center gap-3 transition-all duration-500 ease-in-out md:bottom-6 md:right-6 ${
-      isVisible ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'
-    }`}>
-      {/* Label */}
-      <div className={`rounded-full bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-lg transition-all duration-500 ease-in-out md:text-base ${
-        isLabelVisible ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'
-      }`}>
-        Chat with us
+    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+      {/* Tooltip */}
+      <div
+        className={`transition-all duration-300 ease-out ${
+          showTooltip ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none'
+        }`}
+      >
+        <div className="bg-white px-4 py-3 rounded-2xl shadow-2xl border border-gray-100 relative">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+              <MessageCircle className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-gray-800">Need help?</p>
+              <p className="text-xs text-gray-600">Chat with us on WhatsApp</p>
+            </div>
+          </div>
+          {/* Arrow */}
+          <div className="absolute -bottom-2 right-8 w-4 h-4 bg-white border-r border-b border-gray-100 transform rotate-45"></div>
+        </div>
       </div>
 
-      {/* Button */}
+      {/* Main Button */}
       <button
         onClick={handleClick}
-        className="group relative flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-[#25D366] focus:ring-offset-2 md:h-16 md:w-16"
+        onMouseEnter={() => {
+          setIsHovered(true);
+          setShowTooltip(true);
+        }}
+        onMouseLeave={() => {
+          setIsHovered(false);
+          setShowTooltip(false);
+        }}
+        className="group relative w-16 h-16 rounded-full bg-gradient-to-br from-green-400 via-green-500 to-green-600 shadow-2xl hover:shadow-green-500/50 transition-all duration-300 ease-out hover:scale-110 active:scale-95"
         aria-label="Contact us on WhatsApp"
       >
-        <MessageCircle className="h-7 w-7 transition-transform duration-300 group-hover:scale-110 md:h-8 md:w-8" />
+        {/* Animated rings */}
+        <div className="absolute inset-0 rounded-full bg-green-400 animate-ping opacity-20"></div>
+        <div className="absolute inset-0 rounded-full bg-green-400 opacity-30 animate-pulse"></div>
         
-        {/* Ripple Effect */}
-        <span className="absolute -inset-1 animate-ping rounded-full bg-[#25D366] opacity-25"></span>
+        {/* Gradient overlay on hover */}
+        <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-white/0 to-white/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         
-        {/* Notification Badge */}
-        <div className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-dahla text-[10px] text-white transition-transform duration-300 group-hover:scale-110 md:-right-2 md:-top-2">
-          1
+        {/* Icon container */}
+        <div className="relative w-full h-full flex items-center justify-center">
+          <MessageCircle 
+            className={`w-8 h-8 text-white transition-all duration-300 ${
+              isHovered ? 'scale-110 rotate-12' : 'scale-100 rotate-0'
+            }`}
+            strokeWidth={2.5}
+          />
+        </div>
+
+        {/* Shimmer effect */}
+        <div className="absolute inset-0 rounded-full overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
         </div>
       </button>
+
+      {/* Floating particles effect */}
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(3)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute bottom-8 right-8 w-1 h-1 bg-green-400 rounded-full animate-ping"
+            style={{
+              animationDelay: `${i * 0.3}s`,
+              animationDuration: '2s',
+              opacity: 0.6,
+            }}
+          ></div>
+        ))}
+      </div>
     </div>
   );
 };

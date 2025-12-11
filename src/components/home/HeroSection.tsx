@@ -12,29 +12,30 @@ const HeroSection = () => {
   return (
     <section className="relative h-[100svh] min-h-[600px] overflow-hidden">
       {/* Background image with overlay */}
-      <div className="absolute inset-0 bg-navy/60 backdrop-blur-sm">
+      <div className="absolute inset-0 bg-navy/70">
         <div 
           className="absolute inset-0 bg-cover bg-center"
           style={{ 
             backgroundImage: 'url("https://ik.imagekit.io/sharfi/sharfi__cargo_ship_on_sea_under_blue_sky_during_daytime_--ar_16_3bf98d8f-6076-43ef-8350-81941fd4d3fb.png?updatedAt=1740664468780")', 
-            opacity: 0.65
+            opacity: 0.6
           }}
         ></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-navy/55 to-transparent backdrop-blur-sm" />
       </div>
       
       {/* Content */}
       <div className="relative h-full w-full container mx-auto px-4 sm:px-6 flex flex-col justify-center">
-        <div className="max-w-3xl w-full opacity-0 transition-all duration-700 ease-out transform translate-y-8" 
+        <div className="max-w-3xl w-full opacity-0 transition-all duration-700 ease-out transform translate-y-8 bg-white/5 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-sm px-5 py-6 sm:px-8 sm:py-10" 
           style={{ 
             opacity: isLoaded ? 1 : 0, 
             transform: isLoaded ? 'translateY(0)' : 'translateY(2rem)'
           }}
         >
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4 sm:mb-6">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4 sm:mb-6 drop-shadow-2xl">
             Global Freight Forwarding Excellence Since 1983
           </h1>
           
-          <p className="text-base sm:text-lg text-white/90 mb-6 sm:mb-8 max-w-2xl">
+          <p className="text-base sm:text-lg text-white/90 mb-6 sm:mb-8 max-w-2xl drop-shadow-xl">
             Specialists in air-freight, sea-freight, and chartered operations—trusted by leading airlines and recognized with multiple international accolades.
           </p>
           
