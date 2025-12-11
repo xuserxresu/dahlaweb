@@ -2,7 +2,7 @@ import { SEO } from "@/lib/seo";
 import { getServiceSchema, getBreadcrumbSchema, getFAQSchema } from "@/lib/seo-utils";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { Boxes, Crane, Truck, ShieldCheck, Plane } from "lucide-react";
+import { Boxes, Construction, Truck, ShieldCheck, Plane } from "lucide-react";
 
 const SpecializedCargoPage = () => {
   const faqs = [
@@ -55,7 +55,7 @@ const SpecializedCargoPage = () => {
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 {[
                   { icon: <Boxes className="h-6 w-6" />, title: "Non-Standard Loads", text: "Oversized cargo and irregular dimensions managed end-to-end." },
-                  { icon: <Crane className="h-6 w-6" />, title: "Industrial Strength", text: "Oil equipment, heavy machinery, and engineered lifts." },
+                  { icon: <Construction className="h-6 w-6" />, title: "Industrial Strength", text: "Oil equipment, heavy machinery, and engineered lifts." },
                   { icon: <Truck className="h-6 w-6" />, title: "Ro/Ro & Break Bulk", text: "Rolling cargo and break bulk options with secure lashing." },
                   { icon: <ShieldCheck className="h-6 w-6" />, title: "Risk Managed", text: "Precise documentation, routing, and load management." },
                 ].map((item) => (
